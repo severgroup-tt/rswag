@@ -100,6 +100,13 @@ module Rswag
           end
         end
       end
+      
+      def save_example!
+        after do |example|
+          # TODO: Remove hardcoded application/json content-type. Receive it from actual response
+          example.metadata[:response][:examples] = { 'application/json' => JSON.parse(response.body, symbolize_names: true) }
+        end
+      end
     end
   end
 end

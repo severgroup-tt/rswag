@@ -136,8 +136,17 @@ module Rswag
         target_node.merge!(content: {})
 
         mime_list.each do |mime_type|
-          # TODO upgrade to have content-type specific schema
-          (target_node[:content][mime_type] ||= {}).merge!(schema: schema)
+          content_value = { schema: schema }
+
+          example = target_node.dig(:examples, mime_type)
+
+          if example.present?
+            # TODO: This solution can't let you add multiple examples. It should be more flexible
+            content_value.merge!(examples: { 'Example' => { 'value' => example } })
+          end
+
+          target_node[:content][mime_type] = content_value
+          target_node.delete(:examples)
         end
       end
 

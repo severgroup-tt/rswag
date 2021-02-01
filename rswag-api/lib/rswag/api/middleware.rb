@@ -19,7 +19,7 @@ module Rswag
           swagger = parse_file(filename)
           @config.swagger_filter.call(swagger, env) unless @config.swagger_filter.nil?
           mime = Rack::Mime.mime_type(::File.extname(path), 'text/plain')
-          headers = { 'Content-Type' => mime }.merge(@config.swagger_headers || {})
+          headers = { 'Content-Type' => "#{mime}; charset=UTF-8" }.merge(@config.swagger_headers || {})
           body = unload_swagger(filename, swagger)
 
           return [

@@ -75,12 +75,12 @@ Once you have an API that can describe itself in Swagger, you've opened the trea
 
     ```ruby
     # Gemfile
-    gem 'rswag-api'
-    gem 'rswag-ui'
+    gem 'rswag-api', github: 'severgroup-tt/rswag'
+    gem 'rswag-ui', github: 'severgroup-tt/rswag'
 
     group :development, :test do
       gem 'rspec-rails'
-      gem 'rswag-specs'
+      gem 'rswag-specs', github: 'severgroup-tt/rswag', require: false
     end
     ```
 

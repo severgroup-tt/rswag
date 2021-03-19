@@ -34,7 +34,9 @@ module Rswag
       def validate_headers!(metadata, headers)
         expected = (metadata[:response][:headers] || {}).keys
         expected.each do |name|
-          raise UnexpectedResponse, "Expected response header #{name} to be present" if headers[name.to_s].nil?
+          if metadata.dig(:response, :headers, name, :required) == true && headers[name.to_s].nil?
+            raise UnexpectedResponse, "Expected response header #{name} to be present"
+          end
         end
       end
 

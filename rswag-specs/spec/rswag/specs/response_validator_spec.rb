@@ -18,7 +18,7 @@ module Rswag
         {
           response: {
             code: 200,
-            headers: { 'X-Rate-Limit-Limit' => { type: :integer } },
+            headers: { 'X-Rate-Limit-Limit' => { type: :integer, required: true } },
             schema: {
               type: :object,
               properties: { text: { type: :string } },
